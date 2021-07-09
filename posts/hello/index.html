@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>My New Hugo Site</title>
+<meta name="keywords" content="" />
+<meta name="description" content="基础知识 chart: helm package repository: charts can be collected and shared release: is an instance of a chart running in a Kubernetes cluster. Helm installs charts into Kubernetes, creating a new release for each installation. And to find new charts, you can search Helm chart repositories. Command helm search helm search hub searches the Artifact Hub, which lists helm charts from dozens of different repositories. helm search repo searches the repositories that you have added to your local helm client (with helm repo add).">
+<meta name="author" content="">
+<link rel="canonical" href="http://example.org/posts/hello/" />
+<link crossorigin="anonymous" href="/assets/css/stylesheet.min.35cd0f65a15cafa92372b8313deef5960aae04b90ad722f2bbf509eb0468137e.css" integrity="sha256-Nc0PZaFcr6kjcrgxPe71lgquBLkK1yLyu/UJ6wRoE34=" rel="preload stylesheet" as="style">
+<script defer crossorigin="anonymous" src="/assets/js/highlight.min.7680afc38aa6b15ddf158a4f3780b7b1f7dde7e91d26f073e6229bb7a0793c92.js" integrity="sha256-doCvw4qmsV3fFYpPN4C3sffd5&#43;kdJvBz5iKbt6B5PJI="
+    onload="hljs.initHighlightingOnLoad();"></script>
+<link rel="icon" href="http://example.org/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="http://example.org/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://example.org/favicon-32x32.png">
+<link rel="apple-touch-icon" href="http://example.org/apple-touch-icon.png">
+<link rel="mask-icon" href="http://example.org/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<meta name="generator" content="Hugo 0.85.0" />
+<meta property="og:title" content="" />
+<meta property="og:description" content="基础知识 chart: helm package repository: charts can be collected and shared release: is an instance of a chart running in a Kubernetes cluster. Helm installs charts into Kubernetes, creating a new release for each installation. And to find new charts, you can search Helm chart repositories. Command helm search helm search hub searches the Artifact Hub, which lists helm charts from dozens of different repositories. helm search repo searches the repositories that you have added to your local helm client (with helm repo add)." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://example.org/posts/hello/" /><meta property="article:section" content="posts" />
+
+
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content=""/>
+<meta name="twitter:description" content="基础知识 chart: helm package repository: charts can be collected and shared release: is an instance of a chart running in a Kubernetes cluster. Helm installs charts into Kubernetes, creating a new release for each installation. And to find new charts, you can search Helm chart repositories. Command helm search helm search hub searches the Artifact Hub, which lists helm charts from dozens of different repositories. helm search repo searches the repositories that you have added to your local helm client (with helm repo add)."/>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "http://example.org/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "",
+      "item": "http://example.org/posts/hello/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "",
+  "name": "",
+  "description": "基础知识 chart: helm package repository: charts can be collected and shared release: is an instance of a chart running in a Kubernetes cluster. Helm installs charts into Kubernetes, creating a new release for each installation. And to find new charts, you can search Helm chart repositories. Command helm search helm search hub searches the Artifact Hub, which lists helm charts from dozens of different repositories. helm search repo searches the repositories that you have added to your local helm client (with helm repo add).",
+  "keywords": [
+    
+  ],
+  "articleBody": "基础知识 chart: helm package repository: charts can be collected and shared release: is an instance of a chart running in a Kubernetes cluster. Helm installs charts into Kubernetes, creating a new release for each installation. And to find new charts, you can search Helm chart repositories. Command helm search helm search hub searches the Artifact Hub, which lists helm charts from dozens of different repositories. helm search repo searches the repositories that you have added to your local helm client (with helm repo add).\n helm repo add helm repo add brigade https://brigadecore.github.io/charts helm search repo shti NAME CHART VERSION APP VERSION DESCRIPTION brigade/kashti 0.5.0 v0.4.0 A Helm chart for Kubernetes helm search repo xxx helm install my-release bitnami/wordpress helm uninstall happy-panda helm status RELEASE_NAME 自定义Chart helm show values bitnami/wordpress  values.yaml helm install -f values.yaml bitnami/wordpress --generate-name --values | -f file.yaml --set 直接修改值, --set can be cleared by running helm upgrade with --reset-values specified. --set name=value name: value --set a=b,c=d a: b c: d --set outer.inner=value outer: inner: value --set name={a, b, c} - a - b - c --set servers[0].port=80 servers: - port: 80 --set servers[0].port=80,servers[0].host=example servers: - port: 80 host: example --set name=value1\\,value2 name: \"value1,value2\" --set nodeSelector.\"kubernetes\\.io/role\"=master nodeSelector: kubernetes.io/role: master When a new version of a chart is released, or when you want to change the configuration of your release, you can use the helm upgrade command. helm upgrade -f panda.yaml happy-panda bitnami/wordpress pull到本地自己修改 helm pull bitnami/wordpress 回滚 Now, if something does not go as planned during a release, it is easy to roll back to a previous release using helm rollback [RELEASE] [REVISION]. helm rollback happy-panda 1 Every time an install, upgrade, or rollback happens, the revision number is incremented by 1. The first revision number is always 1. helm history [RELEASE] 查看历史 REVISION 删除 helm uninstall release helm uninstall --keep-history. If you wish to keep a deletion release record Using helm list --uninstalled will only show releases that were uninstalled with the --keep-history flag. repo helm repo list helm repo add dev https://example.com/dev-charts helm repo update 更新 Create my own Chart. helm create deis-workflow As you edit your chart, you can validate that it is well-formed by running helm lint. helm lint 将自己的Chart打包 helm package deis-workflow 安装自己的chart helm install deis-workflow ./deis-workflow-0.1.0.tgz other It has also covered useful utility commands like helm status, helm get, and helm repo Tips and tricks 包含另外一个template value: {{ include \"mytpl\" . | lower | quote }} 下面的必需函数示例为.Values.who声明了一个必需项，并且在缺少该项时将显示错误消息： value: {{ required \"A valid .Values.who entry required!\" .Values.who }} Quote name: {{ .Values.MyName | quote }} port: {{ .Values.Port }} // 整型就不要加引号了 Using the 'include' Function Go提供了一种使用内置模板指令将一个模板包含在另一个模板中的方法。 但是，内置函数不能在Go模板管道中使用。 为了能够包含一个模板，然后对该模板的输出执行操作，Helm具有一个特殊的include函数： {{ include \"toYaml\" $value | indent 2 }} 将其传递给$ value，然后将该模板的输出传递给indent函数。 yaml 中存储值 并且引用 coffee: \"yes, please\" favorite: \u0026favoriteCoffee \"Cappucino\" coffees: - Latte - *favoriteCoffee - Espresso 模板  {{- define “common.tplvalues.render” -}} {{- if typeIS “string” .value }} {{- tpl .value .context }} {{- else }} {{- tpl (.value | toYaml) .context }} {{- end }} {{- end -}}\n使用模板 include 会把模板传给后面的数据,进行渲染 {{- include “common.tplvalues.render” (dict “value” .Values.up “context” $) | indent 12 }}\ntpl: 使用tpl函数，开发人员可以将字符串评估为模板内的模板。\n",
+  "wordCount" : "511",
+  "inLanguage": "en",
+  "datePublished": "0001-01-01T00:00:00Z",
+  "dateModified": "0001-01-01T00:00:00Z",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "http://example.org/posts/hello/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "My New Hugo Site",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "http://example.org/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+<noscript>
+    <style type="text/css">
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: #1d1e20;
+                --entry: #2e2e33;
+                --primary: rgba(255, 255, 255, 0.84);
+                --secondary: rgba(255, 255, 255, 0.56);
+                --tertiary: rgba(255, 255, 255, 0.16);
+                --content: rgba(255, 255, 255, 0.74);
+                --hljs-bg: #2e2e33;
+                --code-bg: #37383e;
+                --border: #333;
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="http://example.org/" accesskey="h" title="My New Hugo Site (Alt + H)">My New Hugo Site</a>
+            <span class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </span>
+        </div>
+        <ul id="menu">
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title">
+      
+    </h1>
+    <div class="post-meta">
+</div>
+  </header> 
+  <div class="post-content"><h3 id="基础知识">基础知识<a hidden class="anchor" aria-hidden="true" href="#基础知识">#</a></h3>
+<pre><code>chart: helm package
+repository: charts can be collected and shared
+release: is an instance of a chart running in a Kubernetes cluster.
+
+Helm installs charts into Kubernetes, creating a new release for each installation. 
+And to find new charts, you can search Helm chart repositories.
+</code></pre><h3 id="command">Command<a hidden class="anchor" aria-hidden="true" href="#command">#</a></h3>
+<p>helm search
+helm search hub
+searches the Artifact Hub, which lists helm charts from dozens of different repositories.
+helm search repo
+searches the repositories that you have added to your local helm client (with helm repo add).</p>
+<pre><code>                     helm repo add
+                         helm  repo add   brigade https://brigadecore.github.io/charts
+                             helm search repo shti
+                                 NAME            CHART VERSION   APP VERSION     DESCRIPTION
+                                     brigade/kashti  0.5.0           v0.4.0          A Helm chart for Kubernetes 
+
+                                     helm search repo xxx
+
+                                     helm install my-release bitnami/wordpress
+                                     helm uninstall happy-panda
+
+                                     helm status RELEASE_NAME
+
+                                     自定义Chart
+                                     helm show values bitnami/wordpress &gt; values.yaml
+                                     helm install -f values.yaml bitnami/wordpress --generate-name
+
+                                         --values | -f file.yaml
+                                             --set 直接修改值, --set can be cleared by running helm upgrade with --reset-values specified.
+                                                     --set name=value
+                                                                 name: value
+                                                                         --set a=b,c=d
+                                                                                     a: b
+                                                                                                 c: d
+                                                                                                         --set outer.inner=value
+                                                                                                                     outer:
+                                                                                                                                     inner: value
+                                                                                                                                             --set name={a, b, c}
+                                                                                                                                                         - a
+                                                                                                                                                                     - b
+                                                                                                                                                                                 - c
+                                                                                                                                                                                         --set servers[0].port=80
+                                                                                                                                                                                                     servers:
+                                                                                                                                                                                                                     - port: 80
+                                                                                                                                                                                                                             --set servers[0].port=80,servers[0].host=example
+                                                                                                                                                                                                                                         servers:
+                                                                                                                                                                                                                                                         - port: 80
+                                                                                                                                                                                                                                                                           host: example
+                                                                                                                                                                                                                                                                                   --set name=value1\,value2
+                                                                                                                                                                                                                                                                                               name: &quot;value1,value2&quot;
+                                                                                                                                                                                                                                                                                                       --set nodeSelector.&quot;kubernetes\.io/role&quot;=master
+                                                                                                                                                                                                                                                                                                                   nodeSelector:
+                                                                                                                                                                                                                                                                                                                                   kubernetes.io/role: master
+
+                                                                                                                                                                                                                                                                                                                                   When a new version of a chart is released, or when you want to change the configuration of your release,
+                                                                                                                                                                                                                                                                                                                                   you can use the helm upgrade command.
+
+                                                                                                                                                                                                                                                                                                                                       helm upgrade -f panda.yaml happy-panda bitnami/wordpress
+
+                                                                                                                                                                                                                                                                                                                                       pull到本地自己修改
+
+                                                                                                                                                                                                                                                                                                                                           helm pull bitnami/wordpress
+
+                                                                                                                                                                                                                                                                                                                                           回滚
+                                                                                                                                                                                                                                                                                                                                           Now, if something does not go as planned during a release,
+                                                                                                                                                                                                                                                                                                                                            it is easy to roll back to a previous release using helm rollback [RELEASE] [REVISION].
+
+                                                                                                                                                                                                                                                                                                                                                helm rollback happy-panda 1
+
+                                                                                                                                                                                                                                                                                                                                                Every time an install, upgrade, or rollback happens, the revision number is incremented by 1. 
+                                                                                                                                                                                                                                                                                                                                                The first revision number is always 1. 
+
+                                                                                                                                                                                                                                                                                                                                                    helm history [RELEASE]
+                                                                                                                                                                                                                                                                                                                                                        查看历史 REVISION
+
+
+                                                                                                                                                                                                                                                                                                                                                        删除
+                                                                                                                                                                                                                                                                                                                                                            helm uninstall release
+
+                                                                                                                                                                                                                                                                                                                                                                helm uninstall --keep-history. 
+                                                                                                                                                                                                                                                                                                                                                                    If you wish to keep a deletion release record
+                                                                                                                                                                                                                                                                                                                                                                        Using helm list --uninstalled will only show releases that were uninstalled with the --keep-history flag.
+
+                                                                                                                                                                                                                                                                                                                                                                        repo
+
+                                                                                                                                                                                                                                                                                                                                                                            helm repo list 
+                                                                                                                                                                                                                                                                                                                                                                                helm repo add dev https://example.com/dev-charts
+                                                                                                                                                                                                                                                                                                                                                                                    helm repo update 更新
+
+                                                                                                                                                                                                                                                                                                                                                                                    Create my own Chart.
+                                                                                                                                                                                                                                                                                                                                                                                            
+                                                                                                                                                                                                                                                                                                                                                                                        helm create deis-workflow
+
+                                                                                                                                                                                                                                                                                                                                                                                            As you edit your chart, you can validate that it is well-formed by running helm lint.
+
+                                                                                                                                                                                                                                                                                                                                                                                                    helm lint
+
+                                                                                                                                                                                                                                                                                                                                                                                                        将自己的Chart打包
+                                                                                                                                                                                                                                                                                                                                                                                                                helm package deis-workflow
+                                                                                                                                                                                                                                                                                                                                                                                                                    安装自己的chart
+                                                                                                                                                                                                                                                                                                                                                                                                                            helm install deis-workflow ./deis-workflow-0.1.0.tgz
+
+                                                                                                                                                                                                                                                                                                                                                                                                                            other
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                 It has also covered useful utility commands like helm status, helm get, and helm repo
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                 Tips and tricks
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                     包含另外一个template
+                                                                                                                                                                                                                                                                                                                                                                                                                                             value: {{ include &quot;mytpl&quot; . | lower | quote  }}
+                                                                                                                                                                                                                                                                                                                                                                                                                                                 
+                                                                                                                                                                                                                                                                                                                                                                                                                                                 下面的必需函数示例为.Values.who声明了一个必需项，并且在缺少该项时将显示错误消息：
+                                                                                                                                                                                                                                                                                                                                                                                                                                                         value: {{ required &quot;A valid .Values.who entry required!&quot; .Values.who  }} 
+                                                                                                                                                                                                                                                                                                                                                                                                                                                             
+                                                                                                                                                                                                                                                                                                                                                                                                                                                             Quote
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                     name: {{ .Values.MyName | quote  }}
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                             port: {{ .Values.Port  }} // 整型就不要加引号了
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 Using the 'include' Function
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         Go提供了一种使用内置模板指令将一个模板包含在另一个模板中的方法。 但是，内置函数不能在Go模板管道中使用。
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 为了能够包含一个模板，然后对该模板的输出执行操作，Helm具有一个特殊的include函数：
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         {{ include &quot;toYaml&quot; $value | indent 2  }}
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 将其传递给$ value，然后将该模板的输出传递给indent函数。
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 yaml 中存储值 并且引用
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 coffee: &quot;yes, please&quot;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 favorite: &amp;favoriteCoffee &quot;Cappucino&quot;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 coffees:
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   - Latte
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     - *favoriteCoffee
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       - Espresso
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       模板
+</code></pre>
+<p>{{- define &ldquo;common.tplvalues.render&rdquo; -}}
+{{- if typeIS &ldquo;string&rdquo; .value }}
+{{- tpl .value .context }}
+{{- else }}
+{{- tpl (.value | toYaml) .context }}
+{{- end }}
+{{- end -}}</p>
+<p>使用模板 include 会把模板传给后面的数据,进行渲染
+{{- include &ldquo;common.tplvalues.render&rdquo; (dict &ldquo;value&rdquo; .Values.up &ldquo;context&rdquo; $) | indent 12 }}</p>
+<p>tpl:
+使用tpl函数，开发人员可以将字符串评估为模板内的模板。</p>
+<pre><code></code></pre>
+
+  </div>
+  <footer class="post-footer">
+  </footer>
+</article>
+    </main>
+    <footer class="footer">
+    <span>&copy; 2021 <a href="http://example.org/">My New Hugo Site</a></span>
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://git.io/hugopapermod" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)">
+    <button class="top-link" id="top-link" type="button" accesskey="g">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+            <path d="M12 6H0l6-6z" />
+        </svg>
+    </button>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+    menu.onscroll = function () {
+        localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>
